@@ -5,10 +5,15 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class CategoriesActivity extends AppCompatActivity implements CategoriesRequest.Callback{
+    @Override
+    public void gotCategories(ArrayList<String> categories) {
 
-    public static void gotCategories(ArrayList categories) {
-        ;
+    }
+
+    @Override
+    public void gotCategoriesError(String message) {
+
     }
 
     @Override

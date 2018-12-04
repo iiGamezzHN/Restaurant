@@ -50,8 +50,6 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
                 JSONObject categories = values.getJSONObject(i);
                 arrayList.add(categories.getString("categories"));
             }
-
-            CategoriesActivity.gotCategories();
         } catch (JSONException e) {
             e.printStackTrace();
         }
