@@ -16,27 +16,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CategoriesRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class MenuRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
     Context context;
     Callback activity;
 
     public interface Callback {
-        void gotCategories(ArrayList<String> categories);
-        void gotCategoriesError(String message);
+        void gotMenus(ArrayList<MenuItem> menus);
+        void gotMenusError(String message);
     }
 
-    public CategoriesRequest(Context con) {
+    public MenuRequest(Context con) {
         context = con;
-    }
-
-    public void getCategories(Callback activity) {
-        String url = "https://resto.mprog.nl/categories";
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
-        queue.add(jsonObjectRequest);
-
-        this.activity = activity;
     }
 
     public void getMenus(Callback activity) {
@@ -58,23 +48,32 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
     @Override
     public void onResponse(JSONObject response) {
+        String pickCategory = MenuActivity.pickedCategory;
 
-        Log.d("response", response.toString());
+        Log.d("responses", pickCategory);
         JSONArray values;
-        ArrayList arrayList = new ArrayList();
+        ArrayList<MenuItem> arrayList = new ArrayList();
 
         try {
-            values = response.getJSONArray("categories");
+            JSONArray menItems = response.getJSONArray("items");
 
-            for (int i = 0; i < values.length(); i++) {
-//                String categories = (values.get(i)).toString();
-                String categories = values.getString(i);
+            for (int i = 0; i < menItems.length(); i++) {
+                JSONObject skillObject = menItems.getJSONObject(i);
+                String category = skillObject.getString("category");
+                String description = skillObject.getString("description");
+                int price = skillObject.getInt("price");
+                String img = skillObject.getString("image_url");
+                int id = skillObject.getInt("id");
+                String name = skillObject.getString("name");
+                Log.d("categories15", category);
 
-                arrayList.add(categories);
-                Log.d("category", categories);
+                if (category == pickCategory) {
+                    MenuItem menu = new MenuItem(name, description, img, price, category);
+                    arrayList.add(menu);
+                }
             }
 
-            activity.gotCategories(arrayList);
+            activity.gotMenus(arrayList);
 
         } catch (JSONException e) {
             e.printStackTrace();
