@@ -67,7 +67,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
                 String name = skillObject.getString("name");
                 Log.d("categories15", category);
 
-                if (category == pickCategory) {
+                if (category.length() == pickCategory.length()) {
                     MenuItem menu = new MenuItem(name, description, img, price, category);
                     arrayList.add(menu);
                 }

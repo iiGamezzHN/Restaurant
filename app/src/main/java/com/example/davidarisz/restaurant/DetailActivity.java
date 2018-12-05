@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -20,7 +22,11 @@ public class DetailActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.detailDescription);
         description.setText(item.getDescription());
 
+        ImageView image = findViewById(R.id.detailFood);
+        Picasso.get().load(item.getImgUrl()).into(image);
+
         TextView price = findViewById(R.id.detailPrice);
-        price.setText(item.getPrice());
+        String pricing = "€" + String.valueOf(item.getPrice());
+        price.setText(pricing);
     }
 }

@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MenuAdapter extends ArrayAdapter<MenuItem> {
@@ -30,7 +32,11 @@ public class MenuAdapter extends ArrayAdapter<MenuItem> {
         name.setText(item.getName());
 
         TextView price = convertView.findViewById(R.id.menu_item_price);
-        price.setText(String.valueOf(item.getPrice()));
+        String pricing = "€" + String.valueOf(item.getPrice());
+        price.setText(pricing);
+
+        ImageView img = convertView.findViewById(R.id.menu_item_img);
+        Picasso.get().load(item.getImgUrl()).into(img);
 
         return convertView;
     }
