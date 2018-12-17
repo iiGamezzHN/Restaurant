@@ -8,5 +8,5 @@ food that belong to that category. All the items in the list will feature a pict
 When you click on a specific food item the app will take you to a more detailed page of that food item. You will want to go to this page if 
 you want to see a bigger picture of the food, and if you see a description of the food.
 
-<img src="doc/Main.jpg" width="250"> <img src="doc/Items.jpg" width="250">
-<img src="doc/Detail.jpg" width="250">
+<img src="doc/categories.jpg" width="250"> <img src="doc/dishes.jpg" width="250">
+<img src="doc/detail.jpg" width="250">
