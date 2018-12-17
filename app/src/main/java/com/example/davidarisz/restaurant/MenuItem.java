@@ -3,9 +3,11 @@ package com.example.davidarisz.restaurant;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable {
+    // Initialize all the variables used in the class
     private String name, description, imgUrl, category;
     private int price;
 
+    // Constructor for the class
     public MenuItem(String name, String description, String imgUrl, int price, String category) {
         this.name = name;
         this.description = description;
@@ -14,6 +16,7 @@ public class MenuItem implements Serializable {
         this.category = category;
     }
 
+    // All the getters and setters for the variables
     public String getName() {
         return name;
     }
@@ -34,10 +37,6 @@ public class MenuItem implements Serializable {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -48,9 +47,5 @@ public class MenuItem implements Serializable {
 
     public int getPrice() {
         return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 }

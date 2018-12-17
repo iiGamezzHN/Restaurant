@@ -6,6 +6,19 @@
     android:orientation="vertical"
     tools:context=".CategoriesActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/category"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0" />
+
     <ListView
         android:id="@+id/categories_listView"
         android:layout_width="match_parent"

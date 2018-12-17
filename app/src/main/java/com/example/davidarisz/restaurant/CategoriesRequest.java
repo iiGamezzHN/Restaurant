@@ -22,13 +22,15 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
     public interface Callback {
         void gotCategories(ArrayList<String> categories);
+
         void gotCategoriesError(String message);
     }
 
     public CategoriesRequest(Context con) {
-        context = con;
+        context = con; // Set context
     }
 
+    // Makes a request from the url
     public void getCategories(Callback activity) {
         String url = "https://resto.mprog.nl/categories";
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -39,27 +41,26 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         this.activity = activity;
     }
 
-    public void getMenus(Callback activity) {
-        String url = "https://resto.mprog.nl/menu";
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
-        queue.add(jsonObjectRequest);
-
-        this.activity = activity;
-    }
-
+    // Catches error
     @Override
     public void onErrorResponse(VolleyError error) {
-        if (error.getMessage() == null)
+        if (error.getMessage() == null) {
             Toast.makeText(context, "Timeout error :(", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(context, "Timeout error :(", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Timeout error :(", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    /**
+     * Catches the response of the request
+     * Makes a JSONArray of the JSONObject response
+     * Loops through the JSONArray and adds the names to an ArrayList
+     * Then calls the ArrayList in a Callback
+     *
+     * @param response
+     */
     @Override
     public void onResponse(JSONObject response) {
-
-        Log.d("response", response.toString());
         JSONArray values;
         ArrayList arrayList = new ArrayList();
 
@@ -67,11 +68,8 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             values = response.getJSONArray("categories");
 
             for (int i = 0; i < values.length(); i++) {
-//                String categories = (values.get(i)).toString();
                 String categories = values.getString(i);
-
                 arrayList.add(categories);
-                Log.d("category", categories);
             }
 
             activity.gotCategories(arrayList);

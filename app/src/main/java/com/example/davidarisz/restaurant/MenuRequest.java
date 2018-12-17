@@ -22,13 +22,15 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
 
     public interface Callback {
         void gotMenus(ArrayList<MenuItem> menus);
+
         void gotMenusError(String message);
     }
 
-    public MenuRequest(Context con) {
+    public MenuRequest(Context con) { // Sets the context
         context = con;
     }
 
+    // Makes a request from the url
     public void getMenus(Callback activity) {
         String url = "https://resto.mprog.nl/menu";
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -39,6 +41,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         this.activity = activity;
     }
 
+    // Catches an error
     @Override
     public void onErrorResponse(VolleyError error) {
         if (error.getMessage() == null)
@@ -46,12 +49,18 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         else Toast.makeText(context, "Timeout error :(", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Catches the response of the request
+     * Makes a JSONArray of the JSONObject response
+     * Loops through the JSONArray and adds the class variables to variables
+     * Uses the newly defined variables to make a new MenuItem Object
+     * Adds the Objects into an ArrayList and calls it in a Callback
+     *
+     * @param response
+     */
     @Override
     public void onResponse(JSONObject response) {
         String pickCategory = MenuActivity.pickedCategory;
-
-        Log.d("responses", pickCategory);
-        JSONArray values;
         ArrayList<MenuItem> arrayList = new ArrayList();
 
         try {
@@ -78,6 +87,5 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

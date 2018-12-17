@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Restaurant</string>
+    <string name="category">Pick a category</string>
+    <string name="menu">Pick a dish</string>
 </resources>
